@@ -80,3 +80,10 @@ while True:
   if not isinstance(wsjtx_packet, pywsjtx.DecodePacket):
     print(f'Ignoring {wsjtx_packet.__class__.__name__}.')
     continue
+  
+  sample = build_chrony_sample(wsjtx_packet.delta_t)
+  chrony_client.sendall(sample)
+  
+  # Chrony won't accept more than one sample with the same timeval, so sleep for
+  # one microsecond to ensure all the decode offsets will be considered.
+  time.sleep(0.000_001)
