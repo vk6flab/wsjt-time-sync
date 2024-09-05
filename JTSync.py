@@ -27,7 +27,7 @@ import socket
 import struct
 import sys
 import time
-import pywsjtx.extra.simple_server
+import pywsjtx.extra.simple_server  # https://github.com/bmo/py-wsjtx
   
 parser = argparse.ArgumentParser(
     prog='PyJTSync',
