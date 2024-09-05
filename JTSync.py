@@ -81,6 +81,8 @@ while True:
     print(f'Ignoring {wsjtx_packet.__class__.__name__}.')
     continue
   
+  print(f'Forwarding DecodePacket with time offset {wsjtx_packet.delta_t} to '
+        f'chrony SOCK {args.chrony_socket}.')
   sample = build_chrony_sample(wsjtx_packet.delta_t)
   chrony_client.sendall(sample)
   
