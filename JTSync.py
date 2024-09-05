@@ -70,7 +70,7 @@ except PermissionError:
               'config file via the refclock SOCK directive.')
   raise PermissionError(message) from None
 
-print('Waiting for WSJT-X DecodePacket datagrams.')
+print('Waiting for WSJT-X DecodePacket datagrams...')
 while True:
   pkt, addr_port = wsjtx_server.rx_packet()
   if pkt is None:
