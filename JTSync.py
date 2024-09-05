@@ -45,6 +45,10 @@ args = parser.parse_args()
 
 
 def build_chrony_sample(offset):
+  """Build binary message in format expected by chrony SOCK.
+  
+  Defined in https://github.com/mlichvar/chrony/blob/master/refclock_sock.c
+  """
   epoch_ns = time.time_ns()
   epoch_s = epoch_ns // 1_000_000_000
   plus_us = (epoch_ns % 1_000_000_000) // 1000
