@@ -36,8 +36,8 @@ parser.add_argument('-i', '--wsjtx-udp-ip-address', default='127.0.0.1')
 parser.add_argument('-p', '--wsjtx-udp-port', default='2237',
                     help='Multicasting is not yet working, so setting this to the WSJT-X UDP port '
                          'will block other programs from receiving packets.  For GridTracker, one '
-                         'workaround is to configure GridTracker to forward packets to another port '
-                         'and set that port here.')
+                         'workaround is to configure GridTracker to forward packets to another port, '
+                         'e.g. 2238, and set that port here.')
 parser.add_argument('-c', '--chrony-socket', default='/run/chrony.pyjtsync.sock',
                     help='The location of the chrony socket, as defined in its config file via the '
                          'refclock SOCK directive.')
