@@ -49,6 +49,7 @@ def build_chrony_sample(offset: float) -> bytearray:
   return struct.pack(
       'qqdiiii', epoch_s, plus_us, offset, pulse, leap, pad, chrony_sock_magic)
 
+
 def follow(file: TextIO, sleep_sec: float = 0.1) -> Iterator[str]:
   line = ''
   while True:
@@ -65,10 +66,9 @@ def follow(file: TextIO, sleep_sec: float = 0.1) -> Iterator[str]:
 
 chrony_client = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
 try:
-  pass
   chrony_client.connect(args.chrony_socket)
 except PermissionError:
-  message = f'Failed to access {chrony_socket}\n'
+  message = f'Failed to access {args.chrony_socket}\n'
   message += 'Check that the socket exists and you have write permissions on it.\n'
   message += ('The socket should be created by chronyd on start up, as defined in its '
               'config file via the refclock SOCK directive.')
