@@ -55,7 +55,7 @@ def follow(file: TextIO, sleep_sec: float = 0.1) -> Iterator[str]:
   while True:
     tmp = file.readline()
     if not tmp:
-      time.sleep(sleep_sec)
+      time.sleep(sleep_sec)  # Sleep to avoid excessive CPU usage.
       continue
     line += tmp
     if not line.endswith('\n'):
