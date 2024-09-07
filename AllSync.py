@@ -29,6 +29,10 @@ Then restart chronyd and the socket should be created:
 
 Usage:
     sudo python3 AllSync.py --all-txt ~/WSJT-X/ALL.TXT
+    
+Then as decodes are added to ALL.TXT you should get terminal messages from AllSync and you
+should see the chrony source start pinging:
+    chronyc sources
 """
 
 import argparse
