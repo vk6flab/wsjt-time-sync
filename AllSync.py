@@ -1,20 +1,34 @@
-#!bin/python3
-"""Use WSJT-X decode delta_t time offsets from ALL.TXT to sync system clock through chrony SOCK.
+#!/usr/bin/python3
+"""Use WSJT-X decode time offsets from ALL.TXT to sync system clock through chrony SOCK.
 
-Normally of course you are reasonably in sync via NTP, but I find when I am offline (e.g.
-at a remote field location for POTA) I get out of sync pretty often.  You can reset system 
-time manually, but I have had cases where it still drifts out of sync repeatedly and this
-disrupts QSOs.  It is also more critical to be in sync for FT4 compared to FT8, and FT4 is
-frequently useful when trying to run QRP on crowded 20m.
+Normally of course you can stay in sync via NTP, but I find when I am offline (e.g. at a 
+remote field location for POTA) I get out of sync pretty often.  You can reset system time 
+manually (chronyc manual on; chronyc settime ...), but I have had cases where it still 
+drifts out of sync repeatedly and disrupts QSOs.  It is also more critical to be in sync 
+for FT4 compared to FT8, and FT4 is frequently useful when trying to run QRP on crowded 20m.
 
 There is a Windows program called JTSync that will handle this, but I didn't find anything
-similar for Linux.  You can also handle the offsets separately in JTDX, but I prefer to use
-WSJT-X.  You can also use a cheap GPS dongle and gpsd to sync chrony, but it is nice to have
+similar for Linux.  You can handle the offsets separately in JTDX, but I prefer to use WSJT-X.
+You can also use a cheap GPS dongle and gpsd to sync chrony, but it is nice to have
 a method that doesn't require extra hardware.  (I would like to just use my cellphone GPS time 
 for sync, but I haven't found anything that works for that on recent (ca. 2024) Android.)
 
-Hence, AllSync...  This is currently working although I haven't tested it in the field yet.
-It probably needs to be run as root in order to access the chrony SOCK.
+Hence, AllSync...  This is working although I haven't tested it in the field yet.
+It needs to be run as root in order to access the chrony SOCK.  As an alternative to watching
+the ALL.TXT file, you can connect to WSJT-X UDP socket, but that is a bit more involved and I 
+didn't yet get multicasting working so it would conflict with other applications that listen 
+to UDP (e.g. GridTracker).
+
+Installation:
+Add a line to the chronyd config file (e.g. /etc/chrony.conf):
+    refclock SOCK /run/chrony.allsync.sock refid WSJT precision 1e-1 offset 0.0000
+
+Then restart chronyd and the socket should be created:
+    sudo systemctl restart chronyd
+    sudo ls -l /run/chrony.allsync.sock
+
+Usage:
+    sudo python3 AllSync.py --all-txt ~/WSJT-X/ALL.TXT
 """
 
 import argparse
