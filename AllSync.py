@@ -96,7 +96,7 @@ print(f'Waiting for decodes to log in {args.all_txt}...')
 with open(args.all_txt) as f:
   f.seek(0, 2)  # Skip existing decodes; seek to the end.
   for line in follow(f):
-    offset = float(line.split()[5])
+    offset = -float(line.split()[5])
     sample = build_chrony_sample(offset)
     print(f'Forwarding sample with offset {offset} to chrony SOCK {args.chrony_socket}.')
     chrony_client.sendall(sample)
