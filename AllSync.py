@@ -13,8 +13,9 @@ There is a Windows program called JTSync that will sync system time based on dec
 but I didn't find anything similar for Linux / Mac OS.  You can handle the offsets separately
 in JTDX, but I prefer to use WSJT-X.  You can also use a cheap GPS dongle and gpsd to sync 
 chrony, but it is nice to have a method that doesn't require extra hardware.  I found an 
-Android app that allows forwarding cellphone NMEA to gpsd over UDP, but I haven't gotten that
-working end-to-end and it requires keeping the phone awake.
+Android app that allows forwarding cellphone NMEA to gpsd over UDP 
+(https://play.google.com/store/apps/details?id=com.kikimanjaro.nmea_to_network), but I haven't
+gotten that working end-to-end and it requires keeping the phone awake.
 
 Hence: AllSync, a very simple Python script that tails WSJT-X's ALL.TXT log, extracts the decode
 offsets, and sends them to chronyc SOCK to keep time synced.  This is working well in field tests.
