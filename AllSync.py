@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Use WSJT-X decode time offsets from ALL.TXT to sync system clock through chrony SOCK.
 
-Digitial radio modes like FT8 require system time to be at least coarsely in sync.
+Digital radio modes like FT8 require system time to be at least coarsely in sync.
 Normally of course you can stay in sync via NTP, but I find when I am offline (e.g. at a 
 remote field location for POTA) I get out of sync pretty often.  You can reset system time 
 manually (chronyc manual on; chronyc settime; chronyc makestep ...), but I have had cases 
