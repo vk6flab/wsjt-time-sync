@@ -26,18 +26,26 @@ applications that listen to UDP (e.g. GridTracker).
 # Installation
 ## Installation (Fedora 39, but should be similar for other Linux or Mac OS):
 Add a line to the chronyd config file (e.g. /etc/chrony.conf):
-    `refclock SOCK /run/chrony.allsync.sock refid WSJT precision 1e-1 offset 0.0000`
+
+    refclock SOCK /run/chrony.allsync.sock refid WSJT precision 1e-1 offset 0.0000
+
 
 Then restart chronyd and the socket should be created:
-    `sudo systemctl restart chronyd`
-    `sudo ls -l /run/chrony.allsync.sock`
+
+    sudo systemctl restart chronyd
+    sudo ls -l /run/chrony.allsync.sock
+
 
 Usage (run as root to have access to the SOCK):
-    `sudo python3 AllSync.py --all-txt ~/WSJT-X/ALL.TXT`
+
+    sudo python3 AllSync.py --all-txt ~/WSJT-X/ALL.TXT
     
+
 Then as decodes are added to ALL.TXT you should get terminal messages from AllSync and you
 should see the chrony source start pinging:
-    `watch chronyc sources`
+
+    watch chronyc sources
+
 
 # Credit
 This code comes from a gist written by @chinasaur (Peter H. Li)
